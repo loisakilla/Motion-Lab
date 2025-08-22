@@ -3,6 +3,13 @@ import { Outlet, NavLink } from 'react-router-dom';
 import { Button } from '@/components/button';
 import { MotionToggle } from '@/app/layouts/MotionToggle';
 
+
+const NavA = ({ to, children}: {to: string; children: React.ReactNode}) => (
+    <NavLink to={to} className={({isActive}) => `px-3 py-1.5 rounded-md text-sm ${isActive ? 'bg-white/10' : 'hover:bg-white/5'}`}>
+      {children}
+    </NavLink>
+)
+
 export const RootLayout: React.FC = () => {
   return (
     <div className="min-h-dvh bg-[hsl(var(--background))] text-[hsl(var(--foreground))]">
@@ -13,14 +20,8 @@ export const RootLayout: React.FC = () => {
           </NavLink>
           <nav className="flex items-center gap-2">
             <MotionToggle />
-            <NavLink
-              to="/"
-              className={({ isActive }) =>
-                `px-3 py-1.5 rounded-md text-sm ${isActive ? 'bg-white/10' : 'hover:bg-white/5'}`
-              }
-            >
-              Home
-            </NavLink>
+            <NavA to="/">Home</NavA>
+            <NavA to="/recipes">Recipes</NavA>
             <Button variant="ghost" size="sm" asChild>
               <a href="https://github.com/loisakilla/Motion-Lab" target="_blank" rel="noreferrer">
                 GitHub
