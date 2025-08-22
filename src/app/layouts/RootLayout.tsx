@@ -22,7 +22,7 @@ export const RootLayout: React.FC = () => {
               Home
             </NavLink>
             <Button variant="ghost" size="sm" asChild>
-              <a href="https://github.com/" target="_blank" rel="noreferrer">
+              <a href="https://github.com/loisakilla/Motion-Lab" target="_blank" rel="noreferrer">
                 GitHub
               </a>
             </Button>
