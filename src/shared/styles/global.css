@@ -3,19 +3,24 @@
 @tailwind utilities;
 
 :root {
-    --background: 240 14% 6%; /* #0b0b0f-like */
-    --foreground: 0 0% 98%;
-    --card: 240 14% 10%;
-    --muted: 240 8% 50%;
-    --primary: 150 70% 60%; /* мятный акцент */
-    --secondary: 260 75% 60%;
+  --background: 240 14% 6%; /* #0b0b0f-like */
+  --foreground: 0 0% 98%;
+  --card: 240 14% 10%;
+  --muted: 240 8% 50%;
+  --primary: 150 70% 60%; /* мятный акцент */
+  --secondary: 260 75% 60%;
 }
 
-
-html, body, #root { height: 100%; }
+html,
+body,
+#root {
+  height: 100%;
+}
 body {
-    font-family: theme('fontFamily.sans'), sans-serif; }
-
+  font-family: theme('fontFamily.sans'), sans-serif;
+}
 
 /* Улучшение рендера текстов для hero-анимации */
-.will-change-transform { will-change: transform; }
+.will-change-transform {
+  will-change: transform;
+}
