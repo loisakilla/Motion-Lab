@@ -16,7 +16,19 @@
 
 ### Содержимое:
 
-- *Роут /recipes и пункт меню.
+- Роут /recipes и пункт меню.
 - Redux slice для избранного, поиска и фильтров (persist в localStorage).
 - Компоненты RecipeCard, RecipeDemoFrame, контролы.
 - 5 рецептов: Stagger Cards, Orbit Ring, Slide-In Panel, Flip Grid Shuffle, Magnetic Buttons.
+
+## Sprint 3 — Playground & Share
+
+### Цель: 
+- Добавить Playground для запуска GSAP-сниппетов с live-превью, кнопками Run/Reset/Share/Export, а также «Try in Playground» из карточек рецептов.
+
+### Содержимое:
+
+- Роут /playground с редактором и превью (iframe sandbox).
+- Интеграция c Recipes: кнопка Try in Playground переносит код из рецепта.
+- Шеринг состояния через URL (сжатие) + Copy link.
+- Экспорт в CodePen (формой POST /pen/define).
