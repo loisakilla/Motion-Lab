@@ -17,9 +17,6 @@
 ### Содержимое:
 
 - *Роут /recipes и пункт меню.
-
 - Redux slice для избранного, поиска и фильтров (persist в localStorage).
-
 - Компоненты RecipeCard, RecipeDemoFrame, контролы.
-
-- 2 рецепта: Stagger Cards (базовый), ScrollTrigger Pin (скролл внутри карточки).
+- 5 рецептов: Stagger Cards, Orbit Ring, Slide-In Panel, Flip Grid Shuffle, Magnetic Buttons.
