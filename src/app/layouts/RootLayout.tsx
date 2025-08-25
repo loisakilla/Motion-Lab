@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet, NavLink } from 'react-router-dom';
-import { Button } from '@/components/button';
+import { Button } from '@/components/ui/button';
 import { MotionToggle } from '@/app/layouts/MotionToggle';
 
 

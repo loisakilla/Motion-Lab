@@ -8,7 +8,7 @@ import { Heart } from 'lucide-react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { toggleFavorite } from '@/features/recipes/store/recipesSlice';
 import {recipes} from "@/features/recipes/data/recipes";
-import {Card, CardContent, CardHeader, CardTitle} from "@/components/card";
+import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 
 export const RecipeCard: React.FC<{ recipe: Recipe}> = ({ recipe }) => {
     const dispatch = useAppDispatch();
@@ -23,7 +23,7 @@ export const RecipeCard: React.FC<{ recipe: Recipe}> = ({ recipe }) => {
     const [params, setParams] = useState<Record<string, any>>(initialParams);
 
     return (
-        <Card className="overflow-hidden">
+        <Card className="overflow-hidden recipe-card">
             <CardHeader className="flex items-start justify-between">
                 <div>
                     <CardTitle>{recipe.title}</CardTitle>
