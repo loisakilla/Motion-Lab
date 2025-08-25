@@ -3,7 +3,8 @@ import { useIsomorphicLayoutEffect } from '@/shared/hooks/useIsomorphicLayoutEff
 import { useGsapContext } from '@/shared/hooks/useGsapContext';
 
 import { shouldReduceMotion } from '@/shared/lib/motion';
-import { Button } from '@/components/button';
+import { Button } from '@/components/ui/button';
+import {Link} from "react-router-dom";
 
 const title = 'Craft Motion with GSAP';
 const subtitle = 'A tiny lab to build, tweak and export delightful animations.';
@@ -50,8 +51,12 @@ export const Hero: React.FC = () => {
           {subtitle}
         </p>
         <div data-cta className="mt-8 flex gap-3">
-          <Button>Get Started</Button>
-          <Button variant="outline">View Recipes</Button>
+          <Button asChild>
+            <Link to="/recipes">Get Started</Link>
+          </Button>
+          <Button variant="outline" asChild>
+            <Link to="/recipes">View Recipes</Link>
+          </Button>
         </div>
       </div>
       <div

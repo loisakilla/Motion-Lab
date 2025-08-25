@@ -13,6 +13,7 @@
     "analyze": "webpack --config webpack.config.prod.cjs --profile --json > stats.json && webpack-bundle-analyzer stats.json"
   },
   "dependencies": {
+    "@radix-ui/react-select": "^2.2.6",
     "@radix-ui/react-slot": "^1.0.2",
     "@reduxjs/toolkit": "^2.2.0",
     "class-variance-authority": "^0.7.0",
@@ -43,6 +44,7 @@
     "html-webpack-plugin": "^5.6.0",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.7",
+    "lucide-react": "^0.441.0",
     "mini-css-extract-plugin": "^2.9.0",
     "postcss": "^8.4.39",
     "postcss-loader": "^7.3.4",
