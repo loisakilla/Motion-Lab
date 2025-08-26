@@ -30,9 +30,14 @@ export const recipes: Recipe[] = [
             tl.from(cards, { yPercent: p.y, opacity: 0, stagger: p.stagger, ease: p.ease, duration: p.duration });
             return tl;
         },
-        codegen: (p) => `import { gsap } from 'gsap';
-
-const cards = document.querySelectorAll('.r-card');
+        htmlgen: () => `
+<div class="p-4">
+  <div class="grid grid-cols-4 gap-3">
+    ${Array.from({length:12}).map(()=>'<div class="r-card h-16 rounded-xl border border-white/10 bg-white/10"></div>').join('')}
+  </div>
+</div>
+`,
+        codegen: (p) => `const cards = document.querySelectorAll('.r-card');
 gsap.from(cards, {
   yPercent: ${p.y},
   opacity: 0,
@@ -76,9 +81,14 @@ gsap.from(cards, {
             });
             return tl;
         },
-        codegen: (p) => `import { gsap } from 'gsap';
-
-const container = document.querySelector('.orbit-container');
+        htmlgen: () => `
+<div class="h-56 flex items-center justify-center">
+  <div class="orbit-container relative h-48 w-48">
+    ${Array.from({length:8}).map(()=>'<div class="o-dot absolute left-1/2 top-1/2 h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/90 shadow"></div>').join('')}
+  </div>
+</div>
+`,
+        codegen: (p) => `const container = document.querySelector('.orbit-container');
 const dots = Array.from(document.querySelectorAll('.o-dot'));
 const n = dots.length;
 
@@ -129,22 +139,34 @@ gsap.to(container, {
             }
             return tl;
         },
-        codegen: (p) => {
-            const fadeDur = Math.min(p.duration * 0.5, 0.6);
-            return `import { gsap } from 'gsap';
-
-const panel = document.querySelector('.sp-panel');
+        htmlgen: () => `
+<div class="relative h-56 rounded-xl border border-white/10 overflow-hidden">
+  <div class="sp-backdrop absolute inset-0 bg-black/60 opacity-0"></div>
+  <div class="sp-panel absolute inset-y-0 left-0 w-56 bg-white/10 border-r border-white/15 p-4">
+    <h4 class="font-semibold">Menu</h4>
+    <ul class="mt-3 space-y-2 text-sm text-white/80">
+      <li>Overview</li><li>Animations</li><li>Settings</li>
+    </ul>
+  </div>
+  <div class="absolute inset-0 grid place-items-center pointer-events-none">
+    <span class="text-xs text-white/60">Preview area</span>
+  </div>
+</div>
+`,
+        codegen: (p) => `const panel = document.querySelector('.sp-panel');
 const backdrop = document.querySelector('.sp-backdrop');
 
 gsap.set(panel, { xPercent: -100 });
 gsap.set(backdrop, { opacity: 0, pointerEvents: 'none' });
 
 const tl = gsap.timeline();
-tl.to(backdrop, { opacity: 1, duration: ${fadeDur}, ease: 'power1.out' }, 0)
+const fadeDur = Math.min(${p.duration} * 0.5, 0.6);
+
+tl.to(backdrop, { opacity: 1, duration: fadeDur, ease: 'power1.out' }, 0)
   .to(panel, { xPercent: 0, duration: ${p.duration}, ease: '${p.ease}' }, 0);
+// overshoot
 ${p.overshoot > 0 ? `tl.to(panel, { x: ${p.overshoot}, duration: 0.12, ease: 'power2.out' })
-  .to(panel, { x: 0, duration: 0.18, ease: 'power2.inOut' });` : ''}`;
-        },
+  .to(panel, { x: 0, duration: 0.18, ease: 'power2.inOut' });` : ''}`,
         previewHeight: 240
     },
     {
@@ -194,12 +216,12 @@ ${p.overshoot > 0 ? `tl.to(panel, { x: ${p.overshoot}, duration: 0.12, ease: 'po
 
             return tl;
         },
-
-        codegen: (p) => `import { gsap } from 'gsap';
-import { Flip } from 'gsap/Flip';
-
-gsap.registerPlugin(Flip);
-
+        htmlgen: () => `
+<div class="grid grid-cols-4 gap-3 p-3">
+  ${Array.from({length:12}).map(()=>'<div class="fg-item h-16 rounded-xl border border-white/10 bg-white/10"></div>').join('')}
+</div>
+`,
+        codegen: (p) => `// requires GSAP Flip plugin (pre-registered)
 const container = document.querySelector('.grid');
 const items = Array.from(document.querySelectorAll('.fg-item'));
 const state = Flip.getState(items);
@@ -208,7 +230,9 @@ const state = Flip.getState(items);
 const order = items.slice();
 for (let i = order.length - 1; i > 0; i--) {
   const j = Math.floor(Math.random() * (i + 1));
-  [order[i], order[j]] = [order[j], order[i]];
+  const tmp = order[i];
+  order[i] = order[j];
+  order[j] = tmp;
 }
 order.forEach(el => container.appendChild(el));
 
@@ -217,8 +241,8 @@ Flip.from(state, {
   duration: ${p.duration},
   ease: '${p.ease}',
   stagger: ${p.stagger},
-  absolute: ${p.absolute},
-  scale: ${p.scale}
+  absolute: ${p.absolute === 'true'},
+  scale: ${p.scale === 'true'}
 });`,
         previewHeight: 220
     },
@@ -301,9 +325,16 @@ Flip.from(state, {
             tl.from(btns, { scale: 0.9, opacity: 0, duration: 0.35, ease: 'power3.out', stagger: 0.05 });
             return tl;
         },
-        codegen: (p) => `import { gsap } from 'gsap';
-
-const scope = document.querySelector('#your-scope');
+        htmlgen: () => `
+<div class="h-56 grid place-items-center mb-scope">
+  <div class="flex gap-4">
+    <button class="mb-btn relative rounded-xl border border-white/15 bg-white/10 px-5 py-3 text-sm"><span class="pointer-events-none select-none">Primary</span></button>
+    <button class="mb-btn relative rounded-xl border border-white/15 bg-white/10 px-5 py-3 text-sm"><span class="pointer-events-none select-none">Secondary</span></button>
+    <button class="mb-btn relative rounded-xl border border-white/15 bg-white/10 px-5 py-3 text-sm"><span class="pointer-events-none select-none">Ghost</span></button>
+  </div>
+</div>
+`,
+        codegen: (p) => `const scope = document.querySelector('#your-scope'); // замените на контейнер
 const btns = Array.from(scope.querySelectorAll('.mb-btn'));
 
 const api = btns.map((el) => ({

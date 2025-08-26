@@ -9,12 +9,23 @@ import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { toggleFavorite } from '@/features/recipes/store/recipesSlice';
 import {recipes} from "@/features/recipes/data/recipes";
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
+import {useNavigate} from "react-router-dom";
+import {Button} from "@/components/ui/button";
+import { encodeState } from '@/features/playground/share';
 
 export const RecipeCard: React.FC<{ recipe: Recipe}> = ({ recipe }) => {
     const dispatch = useAppDispatch();
     const  favs = useAppSelector(s => s.recipes.favorites);
     const isFav =favs.includes(recipe.id);
 
+
+    const navigate = useNavigate();
+    const handleTryInPlayground = () => {
+        const code = recipe.codegen(params);
+        const html = recipe.htmlgen ? recipe.htmlgen(params) : '<div id="app"></div>';
+        const state = encodeState({ code, html, title: recipe.title });
+        navigate(`/playground?state=${state}`);
+    };
     const initialParams = useMemo(() =>
         Object.fromEntries(
             recipe.controls.map(c => [c.key, (c as any).default])),
@@ -44,6 +55,7 @@ export const RecipeCard: React.FC<{ recipe: Recipe}> = ({ recipe }) => {
                 <p className="text-sm text-white/70">{recipe.description}</p>
                 <RecipeDemoFrame recipe={recipe} params={params} />
                 <Controls schema={recipe.controls} params={params} onChange={(k, v) => setParams(p => ({ ...p, [k]: v }))} />
+                <Button variant="outline" onClick={handleTryInPlayground}>Try in Playground</Button>
             </CardContent>
         </Card>
     );

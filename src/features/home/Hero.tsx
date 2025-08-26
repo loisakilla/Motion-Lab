@@ -52,7 +52,7 @@ export const Hero: React.FC = () => {
         </p>
         <div data-cta className="mt-8 flex gap-3">
           <Button asChild>
-            <Link to="/recipes">Get Started</Link>
+            <Link to="/playground">Get Started</Link>
           </Button>
           <Button variant="outline" asChild>
             <Link to="/recipes">View Recipes</Link>
