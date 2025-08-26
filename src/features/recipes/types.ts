@@ -17,6 +17,7 @@ export type Recipe = {
     description: string;
     difficulty: Difficulty;
     tags: string[];
+    htmlgen?: (params: Record<string, any>) => string;
     controls: Control[];
     render: FC; // DOM демо (внутренняя разметка)
     runtime: (g: GSAP, scope: HTMLElement, params: Record<string, any>) => GSAPTimeline;
