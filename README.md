@@ -32,3 +32,6 @@
 - Интеграция c Recipes: кнопка Try in Playground переносит код из рецепта.
 - Шеринг состояния через URL (сжатие) + Copy link.
 - Экспорт в CodePen (формой POST /pen/define).
+
+## Хостиннг приложения:
+- https://motion-lab-two.vercel.app
